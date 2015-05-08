@@ -62,7 +62,7 @@ def uploadThis(path):
     os.chdir('..')
 
 print 'Downloading files'
-#download(FolderName, username, password, server, Org)
+download(FolderName, username, password, server, Org)
 
 myFTP = ftplib.FTP(server)
 myPath = temploc+FolderName
