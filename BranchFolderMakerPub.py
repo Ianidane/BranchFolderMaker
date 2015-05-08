@@ -6,7 +6,7 @@ import webbrowser
 import shutil
 
 OS=platform.system()
-#print OS
+
 if OS == 'Windows':
     temploc = 'C:/Windows/Temp/'
 #    print 'Make sure you have Wget.exe in your System32 folder(you can trust me). Do you want to download this now?'
@@ -17,10 +17,10 @@ if OS == 'Windows':
 #        webbrowser.open(url,new=new)
 else:
     temploc = '/tmp/'
-#print temploc
 
 date = dt.datetime.today().strftime("%y%m%d")
 
+#can hardcode to make process easier
 print 'What org?(abv)'
 Org =raw_input()
 print 'What is your name?'
@@ -43,7 +43,6 @@ def uploadThis(path):
     files = os.listdir(path)
     os.chdir(path)
     for f in files:
-#        if os.path.isfile(path + r'\{}'.format(f)):
         if os.path.isfile(path + '/' + f):
             print 'uploading ' + f
 	    fh = open(f, 'rb')
@@ -51,14 +50,19 @@ def uploadThis(path):
             fh.close()
         elif os.path.isdir(path + '/' + f):
             print 'makeing '+ f +' folder'
-            myFTP.mkd(f)
-            myFTP.cwd(f)
+	    try:
+                myFTP.mkd(f)
+	    except ftplib.all_errors:
+   	        print 'pass'
+	        #folder already exists at destination
+                pass
+	    myFTP.cwd(f)
             uploadThis(path + '/' + f)
     myFTP.cwd('..')
     os.chdir('..')
 
 print 'Downloading files'
-download(FolderName, username, password, server, Org)
+#download(FolderName, username, password, server, Org)
 
 myFTP = ftplib.FTP(server)
 myPath = temploc+FolderName
@@ -66,13 +70,15 @@ myFTP.login(username, password)
 print 'Logging into server'
 try:
     myFTP.mkd('Test'+name+'/'+FolderName)
-except OSError:
-        #folder already exists at destination
+except ftplib.all_errors:
+    print 'pass'
+	#folder already exists at destination
     pass
 
 myFTP.cwd('Test'+name+'/'+FolderName)
 print 'Uploading to server'
-uploadThis(myPath) # now call the recursive function
+uploadThis(myPath) 
+print 'Deleting local file'
 shutil.rmtree(myPath)
 print 'done'
 #sys.exit
