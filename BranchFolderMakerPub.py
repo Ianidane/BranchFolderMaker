@@ -20,7 +20,7 @@ else:
 
 date = dt.datetime.today().strftime("%y%m%d")
 
-#can hardcode to make process easier Test1
+#can hardcode to make process easier Test2
 print 'What org?(abv)'
 Org =raw_input()
 print 'What is your name?'
