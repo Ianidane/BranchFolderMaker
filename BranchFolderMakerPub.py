@@ -1,5 +1,5 @@
 import os, sys, os.path
-import datetime as dt 
+import datetime as dt
 import ftplib
 import platform
 import webbrowser
@@ -20,7 +20,7 @@ else:
 
 date = dt.datetime.today().strftime("%y%m%d")
 
-#can hardcode to make process easier
+#can hardcode to make process easier Test
 print 'What org?(abv)'
 Org =raw_input()
 print 'What is your name?'
@@ -77,7 +77,7 @@ except ftplib.all_errors:
 
 myFTP.cwd('Test'+name+'/'+FolderName)
 print 'Uploading to server'
-uploadThis(myPath) 
+uploadThis(myPath)
 print 'Deleting local file'
 shutil.rmtree(myPath)
 print 'done'
