@@ -20,17 +20,17 @@ else:
 
 date = dt.datetime.today().strftime("%y%m%d")
 
-#can hardcode to make process easier Test3 new branch
-print 'What org?(abv)'
+#can hardcode to make process easier
+print 'What org?(abv) to copy'
 Org =raw_input()
 print 'What is your name?'
 name = raw_input()
 FolderName=Org+'Test'+date+name
-print 'Enter Host'
+print 'Enter FTP Host name'
 server = raw_input()
-print 'User Name?'
+print 'FTP UserName?'
 username = raw_input()
-print 'Password'
+print 'FTP Password'
 password = raw_input()
 
 def download(FolderName, username, password, server, Org):
@@ -81,4 +81,3 @@ uploadThis(myPath)
 print 'Deleting local file'
 shutil.rmtree(myPath)
 print 'Done. New page is ' + server + '/' + FolderName
-#sys.exit
