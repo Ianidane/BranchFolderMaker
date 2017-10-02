@@ -69,16 +69,16 @@ myPath = temploc+FolderName
 myFTP.login(username, password)
 print 'Logging into server'
 try:
-    myFTP.mkd('Test'+name+'/'+FolderName)
+    myFTP.mkd(FolderName)
 except ftplib.all_errors:
     print 'pass'
 	#folder already exists at destination
     pass
 
-myFTP.cwd('Test'+name+'/'+FolderName)
+myFTP.cwd(FolderName)
 print 'Uploading to server'
 uploadThis(myPath)
 print 'Deleting local file'
 shutil.rmtree(myPath)
-print 'done'
+print 'Done. New page is ' + server + '/' + FolderName
 #sys.exit
